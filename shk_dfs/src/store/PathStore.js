@@ -5,10 +5,12 @@ export default class Paths {
         this._path = []
         this._section = []
         this._spk = []
+        this._managers = []
 
         this._selectedPath = {}
         this._selectedSection = {}
         this._selectedSpk = {}
+        this._selectedManagers = {}
         makeAutoObservable(this)
     }
 
@@ -24,6 +26,10 @@ export default class Paths {
         this._spk = spk
     }
 
+    setManagers(managers){
+        this._managers = managers
+    }
+
     setSelectedPath(selectedPath){
         this._selectedPath = selectedPath
     }
@@ -34,6 +40,10 @@ export default class Paths {
 
     setSelectedSpk(selectedSpk){
         this._selectedSpk = selectedSpk
+    }
+
+    setSelectedManagers(selectedManagers){
+        this._selectedManagers = selectedManagers
     }
 
     get path(){
@@ -48,6 +58,10 @@ export default class Paths {
         return this._spk
     }
 
+    get managers(){
+        return this._managers
+    }
+
     get selectedPath(){
         return this._selectedPath
     }
@@ -58,5 +72,9 @@ export default class Paths {
 
     get selectedSpk(){
         return this._selectedSpk
+    }
+
+    get selectedManagers(){
+        return this._selectedManagers
     }
 }

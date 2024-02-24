@@ -12,8 +12,8 @@ class pathController{
     }
 
     async createSPK(req, res) {
-        const {full_name, name, sectionId} = req.body
-        const spk = await SPK.create({full_name, name, sectionId})
+        const {full_name, name, sectionId, managerId} = req.body
+        const spk = await SPK.create({full_name, name, sectionId, managerId})
         return res.json(spk)
     }
 
@@ -43,8 +43,19 @@ class pathController{
 
     async getSpk(req, res) {
         const {id} = req.params
-        const spk = await SPK.findAll({where: {sectionId: id}, attributes: ['name'] })
+        const spk = await SPK.findAll({where: {sectionId: id}, attributes: ['id','name'] })
         return res.json(spk)
+    }
+
+    async getManagers(req, res){
+        const {id} = req.params
+        const managers = await SPK.findAll({where: {id: id}, 
+        include: [{
+            model: Managers,
+            attributes: ['first_manager', 'second_manager']
+            }]
+        })
+        return res.json(managers)
     }
 }
 

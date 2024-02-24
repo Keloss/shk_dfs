@@ -9,5 +9,6 @@ router.post('/createSection', pathController.createSection)
 router.get('/getPath', pathController.getPath)
 router.get('/getSection', pathController.getSection)
 router.get('/getSpk/:id', pathController.getSpk)
+router.get('/getManagers/:id', pathController.getManagers)
 
 module.exports = router

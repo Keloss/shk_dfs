@@ -18,6 +18,11 @@ export const fetchSection = async() => {
 
 export const fetchSpk = async(id) => {
     const {data} = await $host.get(`/api/path/getSpk/${id}`)
-    console.log(data)
+    return data
+}
+
+export const fetchManagers = async(id) => {
+    console.log("name: " + id)
+    const {data} = await $host.get(`/api/path/getManagers/${id}`)
     return data
 }

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Dropdown } from 'flowbite-react';
 import { Context } from '..';
-import { fetchPath, fetchSpk, fetchSection, createPath } from '../http/PathAPI';
+import { fetchPath, fetchSpk, fetchSection, fetchManagers } from '../http/PathAPI';
 import { observer } from 'mobx-react-lite';
 
 
@@ -14,7 +14,7 @@ const getPath = observer(() => {
   useEffect(() => {
     fetchPath().then(data => paths.setPath(data))
     fetchSection().then(data => paths.setSection(data))
-    //fetchSpk(paths.selectedSection.id).then(data => paths.setSpk(data))
+    
   }, [])
 
   // const createPaths = () => {
@@ -51,15 +51,17 @@ const getPath = observer(() => {
         <Dropdown.Item onClick={() => {
           paths.setSelectedSpk(data);
           setSelectedLabelSpk(data.name);
+          fetchManagers(paths.selectedSpk.id).then(data => paths.setManagers(data))
         }} key={data.id}>
           {data.name}
         </Dropdown.Item>
       ))}
     </Dropdown>
     </div>
+    {console.log(paths.selectedManagers.first_manager)}
     <p className='mb-4'>Путь: {paths.selectedSection.name && paths.selectedSpk.name ? `${home}\\${paths.selectedSection.name}\\${paths.selectedSpk.name}` : `${home}`} </p>
-    <p className='mb-4'>Главная бухгалтерия: </p>
-    <p className='mb-4'>Резервная бухгалтерия: </p>
+    {paths.managers.map(data => (<p className='mb-4'>Главная бухгалтерия: {data.manager.first_manager}</p>))}
+    {paths.managers.map(data => (<p className='mb-4'>Резервная бухгалтерия: {data.manager.second_manager}</p>))}
     </div>
     </div>
   );

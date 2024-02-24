@@ -33,6 +33,9 @@ Folder.belongsTo(SPK)
 Managers.hasMany(Folder)
 Folder.belongsTo(Managers)
 
+Managers.hasMany(SPK)
+SPK.belongsTo(Managers)
+
 Section.hasMany(SPK)
 SPK.belongsTo(Section)
 

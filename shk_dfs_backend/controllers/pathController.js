@@ -47,14 +47,24 @@ class pathController{
         return res.json(spk)
     }
 
+    async getAllSpk(req, res) {
+        const spk = await SPK.findAll()
+        return res.json(spk)
+    }
+
     async getManagers(req, res){
         const {id} = req.params
         const managers = await SPK.findAll({where: {id: id}, 
         include: [{
             model: Managers,
-            attributes: ['first_manager', 'second_manager']
+            attributes: ['id', 'first_manager', 'second_manager']
             }]
         })
+        return res.json(managers)
+    }
+
+    async getAllManagers(req, res) {
+        const managers = await Managers.findAll()
         return res.json(managers)
     }
 }

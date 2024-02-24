@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Dropdown } from 'flowbite-react';
+import { Dropdown } from 'flowbite-react';
 import { Context } from '..';
 import { fetchPath, fetchSpk, fetchSection, fetchManagers } from '../http/PathAPI';
 import { observer } from 'mobx-react-lite';
@@ -12,22 +12,8 @@ const getPath = observer(() => {
   const [selectedLabelSpk, setSelectedLabelSpk] = useState("Выберите подраздел");
   const home = "\\Gk.rosatrom.local\\shk_dfs"
   useEffect(() => {
-    fetchPath().then(data => paths.setPath(data))
     fetchSection().then(data => paths.setSection(data))
-    
   }, [])
-
-  // const createPaths = () => {
-  //   const formData = new FormData()
-  //   formData.append('section', paths.selectedSection.name)
-  //   formData.append('spk', paths.selectedSpk.name)
-  //   formData.append('spk_id', paths.selectedSpk.id)
-  //   const sec = formData.get('section')
-  //   const spk = formData.get('spk')
-  //   const spk_id = formData.get('spk_id')
-  //   const dataOfPath = [{path: sec+"\\"+spk, spkId: spk_id}]
-  //   createPath(dataOfPath)
-  // }
 
   return (
     <div className= 'flex justify-center mt-10'>
